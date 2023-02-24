@@ -10,7 +10,7 @@ width, height = 800, 600
 def example_initTeapot():
     glColor3f(1.0, 1.0, 1.0)                                                # specify object color as white
     glLineWidth(1.0)                                                        # reset line width to 1.0
-    glutWireTeapot(5.0) 
+    glutWireTeapot(5.0)                                                     # sets size of teapot wireframe to 5
 
 def drawAxes():                                                             # draw x-axis and y-axis
     glLineWidth(3.0)                                                        # specify line size (1.0 default)
