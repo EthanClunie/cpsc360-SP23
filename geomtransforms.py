@@ -122,18 +122,18 @@ def draw():                                                                 # Th
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)                        # clear the buffers initialized in the display mode
     
     # initialize a teapot in white at origin
-    example_initTeapot()
+    #example_initTeapot()
 
     glPushMatrix()                                                          # save the current model-view trans matrix in the stack
     
     # geometric transformation examples (uncomment "example_initTeatpot")
     #example_translate()                                                    # translate
     #example_scale()                                                        # scale
-    example_rotate()                                                       # rotate
+    #example_rotate()                                                       # rotate
 
     # composite transformation examples (comment out "example_initTeatpot")
     #example_rotate_tranlate()
-    #example_translate_rotate()
+    example_translate_rotate()
 
     # exercise: random pivot-point rotation 
     #exercise1_transfOrder()
