@@ -14,7 +14,7 @@ def example_initTeapot():
     glutWireTeapot(5.0)                                                     # draw a teaport of size 5 in wireframe mode
 
 def example_translate():
-    glTranslatef(15.0, 0.0, 0.0)                                            # construct translation matrix with a translation vector
+    glTranslatef(0.0, 0.0, 15.0)                                            # construct translation matrix with a translation vector
     glColor3f(1.0, 0.2, 0.6)                                                # draw the transformed teaport in pink
     glutWireTeapot(5.0)
 
@@ -127,7 +127,7 @@ def draw():                                                                 # Th
     glPushMatrix()                                                          # save the current model-view trans matrix in the stack
     
     # geometric transformation examples (uncomment "example_initTeatpot")
-    #example_translate()                                                    # translate
+    example_translate()                                                    # translate
     #example_scale()                                                        # scale
     #example_rotate()                                                       # rotate
 
