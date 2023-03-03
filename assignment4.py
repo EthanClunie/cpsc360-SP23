@@ -90,13 +90,14 @@ def spinningTransform():
     glTranslatef(7, 7, 7)
     glRotatef(1, 0, 1, 0)
     glTranslatef(-7, -7, -7)
-    # God save our souls
 
     pass
 
 def scaleByHalf():
     # write your code below and call the function in main()"
+    glTranslatef(7, 7, 7)
     glScalef(0.5, 0.5, 0.5)
+    glTranslatef(-7, -7, -7)
 
     pass
 
