@@ -87,7 +87,9 @@ def drawAxes():                                                             # dr
 #TODO: complete the two functions below
 def spinningTransform():
     # write your code below and call the function in main()
+    glTranslatef(7, 7, 7)
     glRotatef(1, 0, 1, 0)
+    glTranslatef(-7, -7, -7)
 
     pass
 
