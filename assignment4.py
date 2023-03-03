@@ -90,6 +90,7 @@ def spinningTransform():
     glTranslatef(7, 7, 7)
     glRotatef(1, 0, 1, 0)
     glTranslatef(-7, -7, -7)
+    # God save our souls
 
     pass
 
