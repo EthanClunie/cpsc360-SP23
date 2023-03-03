@@ -79,6 +79,9 @@ def exercise1_transfOrder():
     glEnd() 
 
     # TODO: rotate the triangle around a pivot-point (4, 3, 0.1) along z-axis about 90 degrees
+    glTranslatef(4, 3, 0)
+    glRotatef(90.0, 0.0, 0.0, 1.0)
+    glTranslatef(-4, -3, 0)
   
     # draw the transformed triangle centered at (4, 3, 0.1) in blue
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL)                               
@@ -96,11 +99,17 @@ def exercise2_push_pop():
   
     # TODO: Rotate the cylinder around x-axis by -90
     glColor3f(1.0, 1.0, 0.0)
+    glPushMatrix()
+    glRotatef(-90, 1.0, 0, 0)
     gluCylinder(quadratic, 2.5, 2.5, 10.0, 32, 32)
+    glPopMatrix()
 
     # TODO: Translate the sphere by (10, 10, 0)
     glColor3f(0.0, 1.0, 0.0)
+    glPushMatrix()
+    glTranslatef(10, 10, 0)
     gluSphere(quadratic, 2.5, 32, 32)
+    glPopMatrix()
 
 ########################################### OpenGL Program ####################################################
 def drawAxes():                                                             # draw x-axis and y-axis
@@ -133,13 +142,13 @@ def draw():                                                                 # Th
 
     # composite transformation examples (comment out "example_initTeatpot")
     #example_rotate_tranlate()
-    example_translate_rotate()
+    #example_translate_rotate()
 
     # exercise: random pivot-point rotation 
     #exercise1_transfOrder()
 
     # push-pop example: transform 3D objects separately 
-    #exercise2_push_pop()
+    exercise2_push_pop()
 
     glPopMatrix()                                                           # restore the saved model-view trans matrix back
 
