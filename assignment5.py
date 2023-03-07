@@ -21,7 +21,7 @@ def drawAxes():                                                             # dr
     glVertex3f(0.0, 0.0, 100.0)                                             # v1
     glEnd()
 
-def draw_Scarecrow():                                                  # This is the drawing function drawing all graphics (defined by you)
+def draw_Scarecrow(angle):                                                  # This is the drawing function drawing all graphics (defined by you)
     glClearColor(0, 0, 0, 1)                                                # set background RGBA color 
     glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)                        # clear the buffers initialized in the display mode
 
@@ -31,31 +31,59 @@ def draw_Scarecrow():                                                  # This is
 
     # TODO: Head (sphere: radius=2.5) 
     glColor3f(0.0, 1.0, 0.0)
+    glMatrixMode(GL_MODELVIEW)
+    glPushMatrix()
+    glRotatef(angle, 0, 1, 0)
+    glTranslatef(0, 12.5, 0)
     gluSphere(quadratic, 2.5, 32, 32)
+    glPopMatrix()
 
     # TODO: Nose (cylinder: base-radius=0.3, top-radius=0, length=2)
     glColor3f(1.0, 0.0, 0.0)
-    gluCylinder(quadratic, 0.3, 0.0, 1.8, 32, 32)  
+    glPushMatrix()
+    glRotatef(angle, 0, 1, 0)
+    glTranslatef(0, 12.5, 2.5)
+    gluCylinder(quadratic, 0.3, 0.0, 1.8, 32, 32)
+    glPopMatrix()
 
     # TODO: Torso (cylinder: radius=2.5, length=10)
     glColor3f(1.0, 1.0, 0.0)
+    glPushMatrix()
+    glRotatef(-90.0, 1, 0, 0)
     gluCylinder(quadratic, 2.5, 2.5, 10.0, 32, 32)
+    glPopMatrix()
 
     # TODO: Left Leg (cylinders: radius=1.0, length=12)
     glColor3f(1.0, 0.0, 0.0)
+    glPushMatrix()
+    glRotatef(90.0, 1, 0, 0)
+    glTranslatef(-1.2, 0, 0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
+    glPopMatrix()
 
     # TODO: Right Leg (cylinders: radius=1.0, length=12)
     glColor3f(1.0, 0.0, 0.0)
+    glPushMatrix()
+    glRotatef(90.0, 1, 0, 0)
+    glTranslatef(1.2, 0, 0)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
+    glPopMatrix()
 
     # TODO: Left Arm (cylinders: radius=1.0, length=10)
     glColor3f(0.0, 0.0, 1.0)
+    glPushMatrix()
+    glRotatef(-90.0, 0, 1, 0)
+    glTranslatef(0, 9, 2.5)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
+    glPopMatrix()
 
     # TODO: Right Arm (cylinders: radius=1.0, length=10)
     glColor3f(0.0, 0.0, 1.0)
+    glPushMatrix()
+    glRotatef(90.0, 0, 1, 0)
+    glTranslatef(0, 9, 2.5)
     gluCylinder(quadratic, 1.0, 1.0, 12.0, 32, 32)
+    glPopMatrix()
 
 def main():
     pygame.init()                                                           # initialize a pygame program
@@ -63,7 +91,7 @@ def main():
 
     screen = (width, height)                                                # specify the screen size of the new program window
     display_surface = pygame.display.set_mode(screen, DOUBLEBUF | OPENGL)   # create a display of size 'screen', use double-buffers and OpenGL
-    pygame.display.set_caption('CPSC 360 - YOUR NAME')                      # set title of the program window
+    pygame.display.set_caption('CPSC 360 - Ethan CLunie')                   # set title of the program window
 
     glEnable(GL_DEPTH_TEST)
     glMatrixMode(GL_PROJECTION)                                             # set mode to projection transformation
@@ -73,6 +101,7 @@ def main():
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
     gluLookAt(0, 0, 50, 0, 0, -1, 0, 1, 0)
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
+    angle = 0
 
     while True:
         bResetModelMatrix = False
@@ -89,7 +118,8 @@ def main():
                 if event.key == pygame.K_0:
                     bResetModelMatrix = True
 
-        draw_Scarecrow()
+        draw_Scarecrow(angle)
+        angle += 1
 
         # reset the current model-view back to the initial matrix
         if (bResetModelMatrix):
