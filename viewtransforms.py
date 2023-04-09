@@ -95,11 +95,10 @@ def main():
     #glViewport(0, 0, width//2, height//2)                                  # use integer division to set viweport size be half of the window 
     glMatrixMode(GL_PROJECTION)                                             # set mode to projection transformation
     glLoadIdentity()                                                        # reset transf matrix to an identity
-    gluPerspective(45, (width / height), 0.1, 100.0)                        # specify perspective-projection view volume
-    #glOrtho(-40, 40, -30, 30, 40, 60)                                      # specify an orthogonal-projection view volume
+    #gluPerspective(45, (width / height), 0.1, 100.0)                        # specify perspective-projection view volume
+    glOrtho(-40, 40, -30, 30, 40, 60)                                      # specify an orthogonal-projection view volume
 
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
-    gluLookAt(50, 0, 0, -1, 0, 0, 0, 1, 0)                                   # set camera's eye, look-at, and view-up in the world
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
     offset_z = 0
     while True:
@@ -127,7 +126,8 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     offset_z -= 1
 
-        draw_Scarecrow()                                                    # model creation and geom transforms
+        # gluLookAt(0, 0, 50, 0, 0, 0, 0, 1, 0)                               # set camera's eye, look-at, and view-up in the world
+        # draw_Scarecrow()                                                    # model creation and geom transforms
 
         # reset the current model-view back to the initial matrix
         if (bResetModelMatrix):
@@ -136,6 +136,8 @@ def main():
         
         glPushMatrix()
         glLoadMatrixf(initmodelMatrix)
+        gluLookAt(0, 0, 50 - offset_z, 0, 0, 0, 0, 1, 0)                    # set camera's eye, look-at, and view-up in the world
+        draw_Scarecrow()                                                    # model creation and geom transforms
         drawAxes()
         glPopMatrix()
 
