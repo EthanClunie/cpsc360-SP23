@@ -98,7 +98,7 @@ def main():
 
     glMatrixMode(GL_MODELVIEW)                                              # set mode to modelview (geometric + view transf)
     initmodelMatrix = glGetFloat(GL_MODELVIEW_MATRIX)
-    whichQuestion = 2
+    whichQuestion = 1
 
     # Question 1 values
     offset_x = 0
