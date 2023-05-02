@@ -16,17 +16,125 @@ def drawAxes():                                                             # dr
     glColor3f(0.0, 1.0, 0.0)                                                # y-axis: green
     glVertex3f(0.0, 0.0, 0.0)                                               # v0
     glVertex3f(0.0, 100.0, 0.0)                                             # v1
-    glColor3f(0.0, 0.0, 1.0)                                                # z-axis: green
+    glColor3f(0.0, 0.0, 1.0)                                                # z-axis: blue
     glVertex3f(0.0, 0.0, 0.0)                                               # v0
     glVertex3f(0.0, 0.0, 100.0)                                             # v1
     glEnd()
 
 def draw_cube():
+    v_0 = [-10, -10, -10]
+    v_1 = [-10, -10, 10]
+    v_2 = [10, -10, 10]
+    v_3 = [10, -10, -10]
+    v_4 = [-10, 10, -10]
+    v_5 = [-10, 10, 10]
+    v_6 = [10, 10, 10]
+    v_7 = [10, 10, -10]
 
+    verticesList = [v_0, v_1, v_2, v_3, v_4, v_5, v_6, v_7]
+
+    triangle_strips = [
+                [0,1,2,3],
+                [4,5,6,7],
+                [1,5,6,2,7,3,4,0,3,1]
+                ]
+    
+    edgesList = [
+        [1,0], [1,2], [1,5],
+        [3,0], [3,2], [3,7],
+        [6,2], [6,7], [6,5],
+        [4,7], [4,0], [4,5]
+    ]
+    
+    trianglesList = [
+                [0,2,1], [0,3,2],   # Bottom Face
+                [5,7,4], [5,6,7],   # Top Face
+                [1,6,5], [1,2,6],   # Front Face
+                [3,4,7], [3,0,4],   # Back Face
+                [2,7,6], [2,3,7],   # Right Face
+                [0,5,4], [0,1,5]    # Left Face
+    ]
+
+    colorsList = [
+        [0,1,0],                    # (green)
+        [0,0,1],                    # (blue)
+        [1,0,0],                    # (red)
+    ]
+
+    indexOfColor = 0
+    count = 0
+    glBegin(GL_TRIANGLES)
+    for triangle in trianglesList:
+        glColor3fv(colorsList[indexOfColor])
+        for vertex in triangle:
+            glVertex3fv(verticesList[vertex])
+
+        if count >= 3:
+            count = 0
+            indexOfColor += 1
+        else:
+            count += 1
+    glEnd()
+
+    glLineWidth(5)
+    glColor3f(1.0,1.0,1.0)
+    glBegin(GL_LINES)
+    for edge in edgesList:
+        for vertex in edge:
+            glVertex3fv(verticesList[vertex])
+    glEnd()
     pass
 
 def draw_pyramid():
+    v_0 = [-10, 0, -10]         # Back left corner
+    v_1 = [-10, 0, 10]          # Front left corner
+    v_2 = [10, 0, 10]           # Front right corner
+    v_3 = [10, 0, -10]          # Back right corner
+    v_4 = [0, 20, 0]            # Top Vertex
 
+    verticesList = [v_0, v_1, v_2, v_3, v_4]
+
+    edgesList = [
+        [4,1], [4,2], [4,0], [3,4],
+        [1,2], [1,0], [3,2], [3,0]
+    ]
+    
+    triangle_fan = [4, 0, 1, 2, 3]
+
+    trianglesList = [
+        [4,0,1],
+        [4,1,2],
+        [4,2,3],
+        [4,3,0],
+        [0,2,1],            # Bottom Face - First Triangle
+        [0,3,2]             # Bottom Face - Second Triangle
+    ]
+
+    pyramidColorsList = [
+        [1,0,0],            # Left (red)
+        [1,1,0],            # Front (yellow)
+        [0,1,0],            # Right (green)
+        [0,1,1],            # Back (turquoise)
+        [0,0,1],            # Bottom (blue) - First Triangle Color
+        [0,0,1]             # Bottom (blue) - Second Triangle Color
+    ]
+
+    indexOfColor = 0
+    glBegin(GL_TRIANGLES)
+    for triangle in trianglesList:
+        glColor3fv(pyramidColorsList[indexOfColor])
+        for vertex in triangle:
+            glVertex3fv(verticesList[vertex])
+        indexOfColor += 1
+    glEnd()
+
+    glLineWidth(5)
+    glColor3f(1.0, 1.0, 1.0)  
+    glBegin(GL_LINES)
+    for edge in edgesList:
+        for vertex in edge:
+            glVertex3fv(verticesList[vertex])
+    glEnd()
     pass
 
 def draw():
@@ -36,10 +144,10 @@ def draw():
     glCullFace(GL_BACK)                                                     # specify which face NOT drawing (culling)
     
     #TODO: write your code for Question 1.d inside draw_cube()
-    draw_cube()
+    #draw_cube()
 
     #TODO: write your code for Question 2.d inside draw_pyramid()
-    #draw_pyramid()
+    draw_pyramid()
 
 
 def main():
@@ -48,7 +156,7 @@ def main():
 
     screen = (width, height)                                                # specify the screen size of the new program window
     display_surface = pygame.display.set_mode(screen, DOUBLEBUF | OPENGL)   # create a display of size 'screen', use double-buffers and OpenGL
-    pygame.display.set_caption('CPSC 360 - YOUR NAME')                      # set title of the program window
+    pygame.display.set_caption('CPSC 360 - Ethan Clunie')                   # set title of the program window
 
     glEnable(GL_DEPTH_TEST)
     glViewport(0, 0, width, height)
