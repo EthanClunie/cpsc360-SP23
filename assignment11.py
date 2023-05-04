@@ -99,7 +99,7 @@ def draw_pyramid():
         [1,2], [1,0], [3,2], [3,0]
     ]
     
-    triangle_fan = [4, 0, 1, 2, 3]
+    triangle_fan = [4, 0, 1, 2, 3, 0]
 
     trianglesList = [
         [4,0,1],
@@ -119,14 +119,32 @@ def draw_pyramid():
         [0,0,1]             # Bottom (blue) - Second Triangle Color
     ]
 
+    # Draw triangles using GL_TRIANGLES
+    # indexOfColor = 0
+    # glBegin(GL_TRIANGLES)
+    # for triangle in trianglesList:
+    #     glColor3fv(pyramidColorsList[indexOfColor])
+    #     for vertex in triangle:
+    #         glVertex3fv(verticesList[vertex])
+    #     indexOfColor += 1
+    # glEnd()
+
+    # Draw side triangles using GL_TRIANGLE_FAN
     indexOfColor = 0
-    glBegin(GL_TRIANGLES)
-    for triangle in trianglesList:
+    glBegin(GL_TRIANGLE_FAN)
+    for vertex in triangle_fan:
         glColor3fv(pyramidColorsList[indexOfColor])
-        for vertex in triangle:
-            glVertex3fv(verticesList[vertex])
+        glVertex3fv(verticesList[vertex])
         indexOfColor += 1
     glEnd()
+
+    # Draw pyramid base (2 triangles) using GL_TRIANGLE_FAN
+    # indexOfColor = 4
+    # glBegin(GL_TRIANGLE_FAN)
+    # for vertex in base_triangle_fan:
+    #     glColor3fv(pyramidColorsList[indexOfColor])
+    #     glVertex3fv(verticesList[vertex])
+    # glEnd()
 
     glLineWidth(5)
     glColor3f(1.0, 1.0, 1.0)  
