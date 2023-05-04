@@ -138,14 +138,6 @@ def draw_pyramid():
         indexOfColor += 1
     glEnd()
 
-    # Draw pyramid base (2 triangles) using GL_TRIANGLE_FAN
-    # indexOfColor = 4
-    # glBegin(GL_TRIANGLE_FAN)
-    # for vertex in base_triangle_fan:
-    #     glColor3fv(pyramidColorsList[indexOfColor])
-    #     glVertex3fv(verticesList[vertex])
-    # glEnd()
-
     glLineWidth(5)
     glColor3f(1.0, 1.0, 1.0)  
     glBegin(GL_LINES)
